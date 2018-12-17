@@ -1,7 +1,7 @@
 FROM jeffjerseycow/llvm:8.0
 WORKDIR /afl
 RUN apt-get update && \
-    apt-get install git -y && \
+    apt-get install sudo git -y && \
     git clone https://github.com/mcarpenter/afl.git && \
     cd afl && \
     make && \
@@ -9,9 +9,8 @@ RUN apt-get update && \
     cd llvm_mode && \
     make && \
     cd .. && \
-    make install && \
-    mkdir /in && \
-    mkdir /fuzzin && \
-    mkdir /fuzzout
+    make install
+WORKDIR /entry
+COPY run.sh ./run.sh
 WORKDIR /fuzz
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["/entry/run.sh"]

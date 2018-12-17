@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
-if [ -f /in/build.sh ]; then
-  cp -r /in/* /fuzz/
-  chmod +rx build.sh
-  ./build.sh
-  ./fuzz.me -artifact_prefix=/artifacts/ /corpus
-else
-  echo "- Please mount a volume containing a 'build.sh' file"
+grep libfuzzer /etc/passwd
+if [ $? -ne 0 ]; then
+  groupadd -g $INITIALGID libfuzzer && \
+  useradd -r -u $INITIALUID -g $INITIALGID -s /bin/bash libfuzzer && \
+  echo "libfuzzer ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 fi
+
+su libfuzzer

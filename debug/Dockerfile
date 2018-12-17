@@ -2,7 +2,7 @@ FROM jeffjerseycow/llvm:8.0
 WORKDIR /tools
 ENV LC_CTYPE C.UTF-8
 RUN apt-get update && \
-    apt-get install gdb cgdb python3 python3-pip git -y && \
+    apt-get install sudo gdb cgdb python3 python3-pip git -y && \
     pip3 install unicorn capstone ropper && \
     mkdir /in && \
     git clone https://github.com/longld/peda.git && \
@@ -17,6 +17,7 @@ RUN apt-get update && \
     echo "/usr/local/lib" >> /etc/ld.so.conf && \
     ldconfig && \
     pip3 install bindings/python/
-WORKDIR /debug
+WORKDIR /entry
 COPY run.sh ./run.sh
-ENTRYPOINT ["/debug/run.sh"]    
+WORKDIR /debug
+ENTRYPOINT ["/entry/run.sh"]    

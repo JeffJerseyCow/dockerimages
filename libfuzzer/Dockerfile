@@ -1,7 +1,6 @@
 FROM jeffjerseycow/llvm:8.0
-RUN mkdir /in && \
-    mkdir /corpus && \
-    mkdir /artifacts
-WORKDIR /fuzz
+RUN apt-get install sudo -y
+WORKDIR /entry
 COPY run.sh ./run.sh
-ENTRYPOINT ["/fuzz/run.sh"]
+WORKDIR /fuzz
+ENTRYPOINT ["/entry/run.sh"]
