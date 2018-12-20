@@ -1,5 +1,7 @@
 FROM jeffjerseycow/llvm:7.0
 WORKDIR /ikos
+ENV INITIALUSER ikos
+ENV INITIALDIR /ikos
 RUN apt-get update && \
     apt-get install sudo git libboost-all-dev libgmp-dev doxygen libsqlite3-dev -y && \
     git clone https://github.com/NASA-SW-VnV/ikos.git && \

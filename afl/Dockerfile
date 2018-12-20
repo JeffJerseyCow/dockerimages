@@ -1,5 +1,7 @@
 FROM jeffjerseycow/llvm:8.0
-WORKDIR /afl
+WORKDIR /build
+ENV INITIALUSER afl
+ENV INITIALDIR /afl
 RUN apt-get update && \
     apt-get install sudo git -y && \
     git clone https://github.com/mcarpenter/afl.git && \
@@ -12,5 +14,5 @@ RUN apt-get update && \
     make install
 WORKDIR /entry
 COPY run.sh ./run.sh
-WORKDIR /fuzz
+WORKDIR /afl
 ENTRYPOINT ["/entry/run.sh"]

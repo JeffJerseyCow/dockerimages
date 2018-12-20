@@ -1,6 +1,8 @@
 FROM jeffjerseycow/llvm:8.0
 WORKDIR /tools
 ENV LC_CTYPE C.UTF-8
+ENV INITIALUSER debug
+ENV INITIALDIR /debug
 RUN apt-get update && \
     apt-get install sudo gdb cgdb python3 python3-pip git -y && \
     pip3 install unicorn capstone ropper && \
