@@ -11,8 +11,8 @@ RUN apt-get update && \
     cd clang/tools && \
     svn co http://llvm.org/svn/llvm-project/clang-tools-extra/trunk extra && \
     cd ../../../projects && \
-    svn co http://llvm.org/svn/llvm-project/compiler-rt/trunk compiler-rt
-RUN cd llvm && \
+    svn co http://llvm.org/svn/llvm-project/compiler-rt/trunk compiler-rt && \
+    cd llvm && \
     mkdir build && \
     cd build && \
     cmake -G "Ninja" .. -DCMAKE_BUILD_TYPE=Release && \
