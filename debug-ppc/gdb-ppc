@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+if [ $# -ne 1 ]; then
+  echo "Error: Please pass filepath"
+  exit
+fi
+
+TARGET=$(realpath $1)
+
+if [ ! -f $TARGET ]; then
+  echo "Error: File \"$1\" does not exists"
+  exit
+fi
+
+qemu-ppc -g 8888 $TARGET 2> /dev/null &
+gdb-multiarch --command=/entry/ppcinit --se=$TARGET

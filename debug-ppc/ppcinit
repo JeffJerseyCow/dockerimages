@@ -1,0 +1,2 @@
+set architecture powerpc:common
+target remote localhost:8888
